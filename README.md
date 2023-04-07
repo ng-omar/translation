@@ -1,27 +1,101 @@
-# Translation
+# Ng Omar Translation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.18.
+Ng Omar Translation Project
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Use the package manager [npm](https://www.npmjs.com/) to install @ng-omar/translation as dependencies.
 
-## Code scaffolding
+```bash
+npm i @ng-omar/translation @ngx-translation/core ngx-date-fns date-fns
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
 
-## Build
+app.module.ts
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ts
+import { NgModule } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslationModule } from '@ng-omar/translation';
 
-## Running unit tests
+@NgModule({
+  imports: [
+    TranslateModule.forRoot(),
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    // For Static Translations in typescript
+    TranslationModule.forRoot({
+      type: 'strings',
+      languages: [
+        { label: 'Arabic', code: 'ar', isRtl: true },
+        { label: 'English', code: 'en', isRtl: false },
+      ],
+      strings: [arLocale.data, enLocale.data],
+      defaultLanguage: 'ar',
+    }),
 
-## Running end-to-end tests
+    // For Dynamic Translations With Backend library
+    TranslationModule.forRoot({
+      type: 'endpoint',
+      translationEndpoint: 'http://localhost:5157',
+      localStorageKey: 'lang',
+      defaultLanguage: 'ar',
+      module: 'app',
+    }),
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    // For Static Translations Using Json Files
+    TranslationModule.forRoot({
+      type: 'folder',
+      languages: [
+        { label: 'Arabic', code: 'ar', isRtl: true },
+        { label: 'English', code: 'en', isRtl: false },
+      ],
+      i18nFolderPath: '/assets/i18n',
+      module: 'app',
+    }),
+  ],
+})
+export class AppModule {}
+```
 
-## Further help
+## Development
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To run this project in development use
+
+Clone the project
+
+```bash
+  git clone https://github.com/ng-omar/translation.git
+```
+
+Install Packages
+
+```bash
+  npm install
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## Authors
+
+- [@omar-elsayed](https://github.com/omar-elsayed97)
+
+## Hi, I'm Omar Elsayed! 👋
+
+I'm a full stack javascript developer...
+
+## 🛠 Skills
+
+Typescript, Javascript, Angular, Ionic, Nest.js, Node.js, HTML, CSS...
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Feedback
+
+If you have any feedback, please reach out to us at challengeromar97@gmail.com
