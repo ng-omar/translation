@@ -1,6 +1,29 @@
 {
-  "name": "translation",
+  "name": "@ng-omar/translation",
+  "displayName": "Angular Translation",
   "version": "0.0.0",
+  "private": false,
+  "description": "Angular Translation",
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/ng-omar/translation#readme",
+  "bugs": {
+    "url": "https://github.com/ng-omar/translation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ng-omar/translation.git"
+  },
+  "funding": [
+    "https://ng-omar.com/donate"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Omar Elsayed",
+    "email": "challengeromar97@gmail.com",
+    "url": "https://ng-omar.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,23 +31,28 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
+  "prettier": "@js-omar/prettier-config",
   "dependencies": {
-    "@angular/animations": "~12.2.0",
-    "@angular/common": "~12.2.0",
-    "@angular/compiler": "~12.2.0",
-    "@angular/core": "~12.2.0",
-    "@angular/forms": "~12.2.0",
-    "@angular/platform-browser": "~12.2.0",
-    "@angular/platform-browser-dynamic": "~12.2.0",
-    "@angular/router": "~12.2.0",
+    "@angular/animations": "~12.1.1",
+    "@angular/common": "~12.1.1",
+    "@angular/compiler": "~12.1.1",
+    "@angular/core": "~12.1.1",
+    "@angular/forms": "~12.1.1",
+    "@angular/platform-browser": "~12.1.1",
+    "@angular/platform-browser-dynamic": "~12.1.1",
+    "@angular/router": "~12.1.1",
+    "@ngx-translate/core": "^13.0.0",
+    "ngx-date-fns": "8.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular/cli": "~12.2.18",
-    "@angular/compiler-cli": "~12.2.0",
+    "@angular-devkit/build-angular": "~12.1.1",
+    "@angular/cli": "~12.1.1",
+    "@angular/compiler-cli": "~12.1.1",
+    "@js-omar/prettier-config": "^1.0.5",
+    "@js-omar/stylelint-config": "^1.1.1",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",
@@ -33,6 +61,11 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-packagr": "^12.1.1",
     "typescript": "~4.3.5"
+  },
+  "engines": {
+    "node": "16.10.0",
+    "npm": ">=7"
   }
 }

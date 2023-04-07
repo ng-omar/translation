@@ -1,0 +1,40 @@
+{
+  "name": "@ng-omar/translation",
+  "displayName": "Angular Translation",
+  "version": "12.0.1",
+  "private": false,
+  "description": "Angular Translation",
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/ng-omar/translation#readme",
+  "bugs": {
+    "url": "https://github.com/ng-omar/translation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ng-omar/translation.git"
+  },
+  "funding": [
+    "https://ng-omar.com/donate"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Omar Elsayed",
+    "email": "challengeromar97@gmail.com",
+    "url": "https://ng-omar.com"
+  },
+  "peerDependencies": {
+    "@angular/common": "^12.1.1",
+    "@angular/core": "^12.1.1",
+    "@ngx-translate/core": "^13.0.0",
+    "ngx-date-fns": "8.3"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "engines": {
+    "node": "16.10.0",
+    "npm": ">=7"
+  }
+}
