@@ -70,7 +70,7 @@ export class TranslationApiClass {
 
   public getTranslationKeys(
     key: string,
-    translation: string,
+    value: string,
     language: ILanguage,
     isChangedOnly: boolean,
     isEqualToValue: boolean,
@@ -80,7 +80,7 @@ export class TranslationApiClass {
   ): Observable<ITableResult<ITranslationKeyList>> {
     let params = new HttpParams();
     params = params.append('key', key);
-    params = params.append('translation', translation);
+    params = params.append('value', value);
     params = params.append('languageId', language.id!);
     params = params.append('isChangedOnly', isChangedOnly);
     params = params.append('isEqualToValue', isEqualToValue);
