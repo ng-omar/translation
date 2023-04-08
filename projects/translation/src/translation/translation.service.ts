@@ -77,11 +77,11 @@ export class TranslationService {
   }
 
   public async loadTranslations(
-    config?: TranslationConfigForChild
+    config: TranslationConfigForChild
   ): Promise<void> {
-    if (config?.strings) this.setTranslations(config.strings);
+    if (config.strings) this.setTranslations(config.strings);
 
-    if (config?.module) {
+    if (config.module) {
       await this.setTranslationsViaHttp(config.module).toPromise();
     }
   }

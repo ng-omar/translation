@@ -13,7 +13,8 @@ import {
   TranslationConfigForRoot,
   TranslationConfigForChild,
 } from './interfaces';
-import { IS_ROOT_TOKEN, TRANSLATION_CONFIG_FOR_CHILD } from './config';
+import { TRANSLATION_CONFIG_FOR_CHILD } from './config';
+import { LoadTranslationsResolver } from './resolvers/load-translations.resolver';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -23,31 +24,25 @@ export class TranslationModule {
   public static isInitialized = false;
 
   public constructor(
-    private readonly translationService: TranslationService,
-    @Inject(IS_ROOT_TOKEN) isRoot: boolean,
     @Optional()
     @Inject(TRANSLATION_CONFIG_FOR_CHILD)
     translationConfigForChild?: TranslationConfigForChild
-  ) {
-    if (isRoot && TranslationModule.isInitialized) {
-      throw new Error('You cannot use forRoot multiple times');
-    }
-
-    if (!isRoot && !TranslationModule.isInitialized) {
-      throw new Error('You cannot use forChild before forRoot');
-    }
-
-    TranslationModule.isInitialized = true;
-  }
+  ) {}
 
   public static forRoot(
     config: TranslationConfigForRoot
   ): ModuleWithProviders<TranslationModule> {
+    if (TranslationModule.isInitialized) {
+      throw new Error('You cannot use forRoot multiple times');
+    }
+
+    TranslationModule.isInitialized = true;
+
     return {
       ngModule: TranslationModule,
       providers: [
-        { provide: IS_ROOT_TOKEN, useValue: true },
         TranslationService,
+        LoadTranslationsResolver,
         {
           provide: APP_INITIALIZER,
           useFactory: (translationService: TranslationService) => {
@@ -63,13 +58,17 @@ export class TranslationModule {
   public static forChild(
     config?: TranslationConfigForChild
   ): ModuleWithProviders<TranslationModule> {
+    if (!TranslationModule.isInitialized) {
+      throw new Error('You cannot use forChild before forRoot');
+    }
+
     return {
       ngModule: TranslationModule,
       providers: [
-        { provide: IS_ROOT_TOKEN, useValue: false },
         {
           provide: TRANSLATION_CONFIG_FOR_CHILD,
-          useFactory: (s: TranslationService) => s.loadTranslations(config),
+          useFactory: (s: TranslationService) =>
+            config ? s.loadTranslations(config) : null,
           deps: [TranslationService],
           multi: true,
         },

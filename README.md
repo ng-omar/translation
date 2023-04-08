@@ -12,12 +12,15 @@ npm i @ng-omar/translation @ngx-translation/core ngx-date-fns date-fns
 
 ## Usage
 
+for root module
+
 app.module.ts
 
 ```ts
 import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationModule } from '@ng-omar/translation';
+import { arLocale, enLocale } from './18n';
 
 @NgModule({
   imports: [
@@ -30,7 +33,7 @@ import { TranslationModule } from '@ng-omar/translation';
         { label: 'Arabic', code: 'ar', isRtl: true },
         { label: 'English', code: 'en', isRtl: false },
       ],
-      strings: [arLocale.data, enLocale.data],
+      strings: [arLocale, enLocale],
       defaultLanguage: 'ar',
     }),
 
@@ -56,6 +59,87 @@ import { TranslationModule } from '@ng-omar/translation';
   ],
 })
 export class AppModule {}
+```
+
+i18n/index.ts
+
+```ts
+export const arLocale = {
+  lang: 'ar',
+  data: {
+    translate_yes: 'نعم',
+    translate_no: 'لا',
+  },
+};
+
+export const enLocale = {
+  lang: 'en',
+  data: {
+    translate_yes: 'Yes',
+    translate_no: 'No',
+  },
+};
+```
+
+for child module
+
+there are two ways to load the translations in the child module
+
+the first way is to use forChild for static strings
+
+```ts
+import { NgModule } from '@angular/core';
+import { TranslationModule } from '@ng-omar/translation';
+import { arLocale, enLocale } from './18n';
+
+@NgModule({
+  imports: [
+    // For Static Translations in typescript
+    TranslationModule.forChild({
+      strings: [arLocale, enLocale],
+    }),
+  ],
+})
+export class ChildModule {}
+```
+
+the second way is to use resolver
+
+```ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoadTranslationsResolver } from '@ng-omar/translation';
+
+const routes: Routes = [
+  {
+    path: 'login',
+    loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
+
+    // Use the resolver to insure that the translations are loaded before opening the module
+    resolve: { translations: LoadTranslationsResolver },
+
+    // by default the resolver will lock at path and use it as module name for the translations
+    // but if you want to use another module name use the module property inside the data
+    data: { module: 'account' },
+  },
+
+  {
+    path: '',
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then((x) => x.DashboardModule),
+        resolve: { translations: LoadTranslationsResolver },
+      },
+
+      {
+        path: 'excellence',
+        loadChildren: () => import('./excellence/excellence.module').then((x) => x.ExcellenceModule),
+        resolve: { translations: LoadTranslationsResolver },
+      },
+    ],
+  },
+];
 ```
 
 ## Development
