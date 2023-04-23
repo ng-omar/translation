@@ -64,17 +64,19 @@ export class AppModule {}
 i18n/index.ts
 
 ```ts
-export const arLocale = {
-  lang: 'ar',
-  data: {
+import { ILocale } from '@ng-omar/translations';
+
+export const arLocale: ILocale = {
+  code: 'ar',
+  strings: {
     translate_yes: 'نعم',
     translate_no: 'لا',
   },
 };
 
-export const enLocale = {
-  lang: 'en',
-  data: {
+export const enLocale: ILocale = {
+  code: 'en',
+  strings: {
     translate_yes: 'Yes',
     translate_no: 'No',
   },
