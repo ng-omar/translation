@@ -8,3 +8,4 @@ export * from './response.interface';
 export * from './table-result.interface';
 export * from './translation-key-list.interface';
 export * from './update-translation-response.interface';
+export * from './locale.interface';

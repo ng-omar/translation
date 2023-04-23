@@ -7,8 +7,9 @@ import {
   IStrings,
   TranslationConfigForChild,
   TranslationConfigForRoot,
-  StringsOrList,
+  StringsOrLocales,
   IUpdateTranslationResponse,
+  ILocale,
 } from './interfaces';
 import { flattenStrings } from './utils';
 import { map, tap } from 'rxjs/operators';
@@ -104,13 +105,13 @@ export class TranslationService {
     this.translateService.use(language.code);
   }
 
-  public setTranslations(strings: StringsOrList): IStrings {
-    const list: { code: string; strings: IStrings }[] = [];
+  public setTranslations(strings: StringsOrLocales): IStrings {
+    const list: ILocale[] = [];
 
     if (Array.isArray(strings))
       strings.forEach((item) => {
-        if (item.lang !== this.currentLanguage.code) return;
-        list.push({ code: item.lang, strings: item.data });
+        if (item.code !== this.currentLanguage.code) return;
+        list.push(item);
       });
     else
       list.push({

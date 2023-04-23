@@ -1,5 +1,7 @@
+import { ILocale } from './locale.interface';
+
 export interface IStrings {
   [key: string]: string | { [key: string]: string };
 }
 
-export type StringsOrList = IStrings | { lang: string; data: IStrings }[];
+export type StringsOrLocales = IStrings | ILocale[];

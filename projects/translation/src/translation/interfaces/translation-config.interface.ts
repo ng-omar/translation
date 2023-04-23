@@ -1,5 +1,5 @@
 import { ILanguage } from './language.interface';
-import { StringsOrList } from './strings.interface';
+import { StringsOrLocales } from './strings.interface';
 
 export type TranslationConfigForRoot =
   | ITranslationConfigFolder
@@ -8,7 +8,7 @@ export type TranslationConfigForRoot =
 
 export type TranslationConfigForChild = {
   module?: string;
-  strings?: StringsOrList;
+  strings?: StringsOrLocales;
 };
 
 export interface ITranslationConfigFolder extends ITranslationConfigBase {
@@ -27,10 +27,11 @@ export interface ITranslationConfigEndpoint extends ITranslationConfigBase {
 export interface ITranslationConfigString extends ITranslationConfigBase {
   type: 'strings';
   languages: ILanguage[];
-  strings: StringsOrList;
+  strings: StringsOrLocales;
 }
 
 export interface ITranslationConfigBase {
   defaultLanguage?: string;
   localStorageKey?: string;
+  strings?: StringsOrLocales;
 }
