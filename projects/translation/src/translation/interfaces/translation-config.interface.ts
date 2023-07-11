@@ -34,4 +34,5 @@ export interface ITranslationConfigBase {
   defaultLanguage?: string;
   localStorageKey?: string;
   strings?: StringsOrLocales;
+  dateFnsLocales?: { code: string; locale: any }[];
 }

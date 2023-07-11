@@ -73,8 +73,12 @@ export class TranslationService {
 
     this.translateService.use(selectedLanguage.code);
 
-    if (selectedLanguage.dateFnsLocale)
-      this.dateFnsConfig.setLocale(selectedLanguage.dateFnsLocale);
+    const dateFnsLocale =
+      selectedLanguage.dateFnsLocale ||
+      config.dateFnsLocales?.find((l) => l.code === selectedLanguage.code)
+        ?.locale;
+
+    if (dateFnsLocale) this.dateFnsConfig.setLocale(dateFnsLocale);
   }
 
   public async loadTranslations(
